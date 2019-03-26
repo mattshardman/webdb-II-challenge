@@ -57,6 +57,16 @@ server.put('/api/zoos/:id', async (req, res, next) => {
   }
 });
 
+server.delete('/api/zoos/:id', async (req, res) => {
+  try {
+    const deletedZoo = await db('zoos').where({ id: req.params.id }).del();
+    res.status(201)
+    res.json(deletedZoo);
+  } catch (err) {
+    res.status(500)
+    res.json(err);
+  }
+});
 
 const port = 3300;
 server.listen(port, function() {
