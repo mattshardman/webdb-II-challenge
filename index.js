@@ -34,6 +34,17 @@ server.get('/api/zoos/:id', async (req, res, next) => {
   }
 });
 
+server.post('/api/zoos', async (req, res, next) => {
+  try {
+    const id = await db.insert(req.body).into('zoos');
+    res.status(201)
+    res.json(id);
+  } catch (err) {
+    res.status(500)
+    res.json(err);
+  }
+});
+
 
 
 const port = 3300;
