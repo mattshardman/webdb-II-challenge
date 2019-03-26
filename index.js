@@ -11,6 +11,16 @@ const db = knex(knexConfig.development);
 server.use(helmet());
 
 // endpoints here
+server.get('/api/zoos', async (req, res, next) => {
+  try {
+    const zoos = await db('zoos');
+    res.status(200)
+    res.json(zoos);
+  } catch (err) {
+    res.status(500)
+    res.json(err);
+  }
+});
 
 
 const port = 3300;
