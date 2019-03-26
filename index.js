@@ -1,12 +1,17 @@
-const express = require('express');
+const mattspress = require('mattspress');
 const helmet = require('helmet');
 
-const server = express();
+const server = mattspress();
 
-server.use(express.json());
+const knex = require('knex');
+const knexConfig = require('./knexfile');
+
+const db = knex(knexConfig.development);
+
 server.use(helmet());
 
 // endpoints here
+
 
 const port = 3300;
 server.listen(port, function() {
