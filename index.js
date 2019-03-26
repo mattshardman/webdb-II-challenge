@@ -45,6 +45,17 @@ server.post('/api/zoos', async (req, res, next) => {
   }
 });
 
+server.put('/api/zoos/:id', async (req, res, next) => {
+  try {
+    await db('zoos').where({ id: req.params.id }).update(req.body);
+    const newZoo = await db('zoos').where({ id: req.params.id }).first();
+    res.status(201)
+    res.json(newZoo);
+  } catch (err) {
+    res.status(500)
+    res.json(err);
+  }
+});
 
 
 const port = 3300;
